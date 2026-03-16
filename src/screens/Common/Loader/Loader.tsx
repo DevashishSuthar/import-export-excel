@@ -1,32 +1,40 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
-import OverlayLoader from 'react-loading-overlay-ts';
 
-import { RootState } from 'store/Store';
+import type { RootState } from '@/store/Store';
 
 type Props = {
-    children?: React.ReactNode
-}
+  children?: React.ReactNode;
+};
 
-const Loader = (props: Props) => {
-    const isLoading = useSelector((state: RootState) => state.loaderData.isLoading);
+const Loader = ({ children }: Props) => {
+  const isLoading = useSelector((state: RootState) => state.loaderData.isLoading);
 
-    return (
-        <Fragment>
-            <OverlayLoader active={isLoading}
-                styles={{
-                    overlay: (base: CSSProperties) => ({
-                        ...base,
-                        background: 'rgba(0, 0, 0, 0.6)',
-                        zIndex: 1400
-                    })
-                }}
-                spinner={<BeatLoader size={30} margin={2} color={'#9d48be'} />}
-                {...props}
-            />
-        </Fragment>
-    );
+  return (
+    <>
+      {children}
+
+      {isLoading && (
+        <div style={overlayStyle}>
+          <BeatLoader size={30} margin={2} color="#9d48be" />
+        </div>
+      )}
+    </>
+  );
+};
+
+const overlayStyle: React.CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  height: '100vh',
+  background: 'rgba(0,0,0,0.6)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 1400
 };
 
 export default Loader;

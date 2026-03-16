@@ -1,48 +1,209 @@
-# Getting Started with Create React App
+# Excel-JSON File Converter
 
-Live Demo Available on:- https://import-export-excel.netlify.app/
+A modern React TypeScript application built with Vite that provides seamless conversion between Excel and JSON file formats. Upload your files and get instant conversions with a clean, user-friendly interface.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 Live Demo
 
-## Available Scripts
+[View Live Demo](https://import-export-excel.netlify.app/)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- **JSON to Excel Conversion**: Convert JSON files to CSV or XLSX formats
+- **Excel to JSON Conversion**: Transform Excel files (.xls, .xlsx) to JSON format
+- **File Validation**: Automatic file type and format validation
+- **Real-time Feedback**: Toast notifications for success/error messages
+- **Loading States**: Visual loading indicators during file processing
+- **Responsive Design**: Clean, modern UI built with Material-UI
+- **TypeScript Support**: Full type safety throughout the application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛠️ Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Frontend Framework**: React 19 with TypeScript
+- **Build Tool**: Vite
+- **State Management**: Redux Toolkit
+- **UI Library**: Material-UI (MUI)
+- **HTTP Client**: Axios
+- **Notifications**: Notyf
+- **Loading Components**: React Spinners
+- **Styling**: CSS Modules with Material-UI theming
 
-### `npm test`
+## 📋 Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v16 or higher)
+- npm or yarn package manager
+- Backend API server for file conversion endpoints
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd import-export-excel-frontend-ts
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run eject`
+3. Create environment file:
+```bash
+cp .env.example .env
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Configure environment variables:
+```env
+VITE_API_URL=your_backend_api_url
+VITE_BASE_URL=your_base_url_for_file_downloads
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Development
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Start the development server:
+```bash
+npm run dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The application will be available at `http://localhost:5173`
 
-## Learn More
+### Build for Production
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   └── File.tsx        # Main file conversion component
+├── configs/            # Configuration files
+│   ├── Axios.ts        # HTTP client configuration
+│   └── Env.ts          # Environment variables
+├── constants/          # Application constants
+│   ├── ApiEndpoints.ts # API endpoint definitions
+│   └── FileExtensions.ts # Supported file extensions
+├── helpers/            # Utility helpers
+│   └── ImagesHelper.ts # Image asset exports
+├── redux/              # State management
+│   └── Slices/
+│       └── LoaderSlice.ts # Loading state management
+├── screens/            # Page/screen components
+│   └── Common/
+│       └── Loader/     # Global loading component
+├── services/           # API service functions
+│   └── FileService.ts  # File conversion API calls
+├── store/              # Redux store configuration
+│   └── Store.ts        # Main store setup
+├── utils/              # Utility functions
+│   └── ToastUtils.ts   # Notification utilities
+└── assets/             # Static assets
+    └── images/         # Image files
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_API_URL` | Backend API base URL | Yes |
+| `VITE_BASE_URL` | Base URL for file downloads | Yes |
+
+### API Endpoints
+
+The application expects the following backend endpoints:
+
+- `POST /files/upload-json` - Convert JSON to Excel
+- `POST /files/upload-excel` - Convert Excel to JSON
+
+## 🎯 Usage
+
+### JSON to Excel Conversion
+
+1. Select the desired output format (CSV or XLSX)
+2. Click "Upload Your File" and select a JSON file
+3. Click "Start Uploading Json File"
+4. The converted file will automatically download
+
+### Excel to JSON Conversion
+
+1. Click "Upload Your File" and select an Excel file (.xls or .xlsx)
+2. Click "Start Uploading Excel File"
+3. The converted JSON file will automatically download
+
+## 📝 File Format Requirements
+
+### JSON Files
+- Must have proper JSON syntax
+- Use double quotes for strings
+- Ensure proper comma separation
+- File extension: `.json`
+
+### Excel Files
+- First row should contain column headers/keys
+- Data should be properly formatted in rows and columns
+- Supported formats: `.xls`, `.xlsx`
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Open a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Material-UI for the beautiful component library
+- Redux Toolkit for state management
+- Vite for the fast build tool
+- React community for the amazing ecosystem
+
+---
+
+Built with ❤️ using React, TypeScript, and Vite
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

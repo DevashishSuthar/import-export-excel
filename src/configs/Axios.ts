@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-import { REACT_APP_API_URL } from './EnvConfig';
-import { showLoader, hideLoader } from '../redux/Slices/LoaderSlice';
-import store from '../store/Store';
+import { VITE_API_URL } from '@/configs/Env';
+import { showLoader, hideLoader } from '@/redux/Slices/LoaderSlice';
+import store from '@/store/Store';
 
 const axiosInstance = axios.create({
-    baseURL: REACT_APP_API_URL,
+    baseURL: VITE_API_URL,
 });
 
 axiosInstance.interceptors.request.use(

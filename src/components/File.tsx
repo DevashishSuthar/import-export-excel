@@ -1,18 +1,18 @@
 import React, { Fragment, useRef, useState } from 'react';
-import { Button, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
+import { Button, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 // Local absolute imports
-import { REACT_APP_BASE_URL } from 'configs/EnvConfig';
-import { FILE_EXTENSIONS } from 'constants/FileExtensionsConstant';
-import { IMG_LOGO } from 'helpers/ImagesHelper';
-import { showErrorToastMessage, showSuccessToastMessage } from 'utils/ToastUtils';
-import { generateExcelFromJson, generateJsonFromExcel } from 'services/FileService';
+import { VITE_BASE_URL } from '@/configs/Env';
+import { FILE_EXTENSIONS } from '@/constants/FileExtensions';
+import { IMG_LOGO } from '@/helpers/ImagesHelper';
+import { showErrorToastMessage, showSuccessToastMessage } from '@/utils/ToastUtils';
+import { generateExcelFromJson, generateJsonFromExcel } from '@/services/FileService';
 
 const File = () => {
     const jsonFileRef = useRef<HTMLInputElement>(null);
     const excelFileRef = useRef<HTMLInputElement>(null);
-    const [selectedJsonFile, setSelectedJsonFile] = useState(null);
-    const [selectedExcelFile, setSelectedExcelFile] = useState(null);
+    const [selectedJsonFile, setSelectedJsonFile] = useState<File | null>(null);
+    const [selectedExcelFile, setSelectedExcelFile] = useState<File | null>(null);
     const [generatedFileType, setGeneratedFileType] = useState('csv');
 
     const openUrlInNewTab = (url: string) => {
@@ -32,7 +32,7 @@ const File = () => {
                     const { success, message, data } = responseData;
                     if (success) {
                         showSuccessToastMessage(message);
-                        openUrlInNewTab(`${REACT_APP_BASE_URL}/${data.excelFilePath}`);
+                        openUrlInNewTab(`${VITE_BASE_URL}/${data.excelFilePath}`);
                     } else {
                         showErrorToastMessage(message);
                     }
@@ -54,7 +54,7 @@ const File = () => {
                     const { success, message, data } = responseData;
                     if (success) {
                         showSuccessToastMessage(message);
-                        openUrlInNewTab(`${REACT_APP_BASE_URL}/${data.jsonFilePath}`);
+                        openUrlInNewTab(`${VITE_BASE_URL}/${data.jsonFilePath}`);
                     } else {
                         showErrorToastMessage(message);
                     }
@@ -71,21 +71,25 @@ const File = () => {
             return obj;
         } catch (error) {
             console.log('ERROR IN JSON PARSING: ', error);
-            jsonFileRef.current.value = '';
+            if (jsonFileRef.current) {
+                jsonFileRef.current.value = '';
+            }
             setSelectedJsonFile(null);
             showErrorToastMessage('Please upload json file in proper format.');
         }
     };
 
     const handleJsonFileChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-        const file = evt.target.files[0];
+        const file = evt.target.files?.[0];
         if (file) {
             const { name } = file;
             const fileNameArr = name.split('.');
             const fileExt = fileNameArr[fileNameArr.length - 1];
             if (fileExt !== FILE_EXTENSIONS.JSON) {
                 showErrorToastMessage('Please upload .json file.');
-                jsonFileRef.current.value = '';
+                if (jsonFileRef.current) {
+                    jsonFileRef.current.value = '';
+                }
                 setSelectedJsonFile(null);
                 return;
             }
@@ -98,7 +102,7 @@ const File = () => {
 
     const handleExcelFileChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
 
-        const file = evt.target.files[0];
+        const file = evt.target.files?.[0];
         if (file) {
             const { name } = file;
             const fileNameArr = name.split('.');
@@ -107,7 +111,9 @@ const File = () => {
                 setSelectedExcelFile(file);
             } else {
                 showErrorToastMessage('Please upload .xls or .xlsx file.');
-                excelFileRef.current.value = '';
+                if (excelFileRef.current) {
+                    excelFileRef.current.value = '';
+                }
                 setSelectedExcelFile(null);
             }
         }

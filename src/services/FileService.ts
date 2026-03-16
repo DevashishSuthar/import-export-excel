@@ -1,5 +1,5 @@
-import Axios from 'configs/AxiosConfig';
-import { FILE_ENDPOINTS } from 'constants/ApiEndpointsContstant';
+import Axios from '@/configs/Axios';
+import { FILE_ENDPOINTS } from '@/constants/ApiEndpoints';
 
 export const generateExcelFromJson = (data: FormData) => {
     return Axios.post(FILE_ENDPOINTS.generateExcelFromJson, data);

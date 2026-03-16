@@ -1,7 +1,5 @@
-import React from 'react';
-
-import Loader from 'screens/Common/Loader/Loader';
-import File from 'components/File';
+import Loader from '@/screens/Common/Loader/Loader';
+import File from '@/components/File';
 import './App.css';
 
 const App = () => {
