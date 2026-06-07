@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+node_modules/
 /node_modules
 /.pnp
 .pnp.js
@@ -25,3 +26,6 @@ yarn-error.log*
 # Env files
 .env
 .env.*.local
+
+package-lock.json
+yarn.lock
