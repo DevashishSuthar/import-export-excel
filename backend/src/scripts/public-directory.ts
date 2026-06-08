@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-const { FILE_DIRECTORIES } = require('../constants/global.constant');
+import { FILE_DIRECTORIES } from '@/constants/global';
 
 const { PUBLIC_DIR, ASSETS_DIR, EXCELS_DIR, FILES_DIR, JSONS_DIR } = FILE_DIRECTORIES;
 

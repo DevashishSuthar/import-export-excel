@@ -1,23 +1,23 @@
-const multer = require('multer');
+import multer from 'multer';
 
-const { FILE_DIRECTORIES } = require('../constants/global.constant');
-const { FIELD_NAMES, FILE_MIMETYPES } = require('../constants/multer.constant');
+import { FILE_DIRECTORIES } from '@/constants/global';
+import { FIELD_NAMES, FILE_MIMETYPES } from '@/constants/multer';
 
 const { JSON, XLS, XLSX } = FILE_MIMETYPES;
 const { PUBLIC_DIR, ASSETS_DIR, EXCELS_DIR, FILES_DIR } = FILE_DIRECTORIES;
 
-const getFileExtension = (file) => {
+const getFileExtension = (file: any): string => {
     const fileNameArr = file.originalname.split('.');
     return fileNameArr[fileNameArr.length - 1];
 };
 
-const setFileName = (req, file, cb) => {
+const setFileName = (req: any, file: any, cb: any): void => {
     const fileExt = getFileExtension(file);
     cb(null, `${file.fieldname}-${Date.now()}.${fileExt}`);
 };
 
-const setDestinationForFile = (destinationPath) => {
-    return (req, file, cb) => cb(null, destinationPath);
+const setDestinationForFile = (destinationPath: string) => {
+    return (req: any, file: any, cb: any): void => cb(null, destinationPath);
 };
 
 const fileStorage = multer.diskStorage({
@@ -27,7 +27,7 @@ const fileStorage = multer.diskStorage({
 
 const fileUploadMiddleware = multer({
     storage: fileStorage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req: any, file: any, cb: any): void => {
         const fileExt = getFileExtension(file);
         if (fileExt === JSON) {
             req.fileValidationError = false;
@@ -45,7 +45,7 @@ const excelStorage = multer.diskStorage({
 
 const excelUploadMiddleware = multer({
     storage: excelStorage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req: any, file: any, cb: any): void => {
         const fileExt = getFileExtension(file);
         if (fileExt === XLSX || fileExt === XLS) {
             req.fileValidationError = false;
@@ -56,7 +56,7 @@ const excelUploadMiddleware = multer({
     },
 }).single(FIELD_NAMES.EXCEL);
 
-module.exports = {
+export {
     fileUploadMiddleware,
     excelUploadMiddleware
 };

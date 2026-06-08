@@ -1,22 +1,33 @@
 {
-  "name": "import-export-excel-poc",
+  "name": "import-export-excel",
   "version": "1.0.0",
   "description": "poc of converting json to excel file and excel to json file.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
-  "author": "Dev",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "packageManager": "pnpm@10.32.1",
   "dependencies": {
     "convert-excel-to-json": "^1.7.0",
-    "cors": "^2.8.5",
-    "exceljs": "^4.2.1",
-    "express": "^4.17.1",
-    "joi": "^17.4.2",
-    "multer": "^1.4.2"
+    "cors": "^2.8.6",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0"
+    "@types/convert-excel-to-json": "^1.7.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.5.0",
+    "dotenv": "^17.3.1",
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3"
   }
 }
