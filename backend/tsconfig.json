@@ -6,11 +6,11 @@
 
     // Environment Settings
     "target": "ES2022",
-    "module": "commonjs",
+    "module": "node16",
     "lib": ["ES2022"],
     "types": ["node"],
     "esModuleInterop": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node16",
     "ignoreDeprecations": "5.0",
     "resolveJsonModule": true,
     "paths": {
@@ -34,7 +34,7 @@
     // Node.js specific
     "isolatedModules": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
